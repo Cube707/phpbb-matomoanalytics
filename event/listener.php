@@ -1,14 +1,14 @@
 <?php
 /**
  *
- * Google Analytics extension for the phpBB Forum Software package.
+ * Matomo Analytics extension for the phpBB Forum Software package.
  *
  * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-namespace phpbb\googleanalytics\event;
+namespace cube\matomoanalytics\event;
 
 use phpbb\config\config;
 use phpbb\language\language;
@@ -60,25 +60,24 @@ class listener implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return [
-			'core.acp_board_config_edit_add'	=> 'add_googleanalytics_configs',
-			'core.page_header'					=> 'load_google_analytics',
-			'core.validate_config_variable'		=> 'validate_googleanalytics_id',
+			'core.acp_board_config_edit_add'	=> 'add_matomoanalytics_configs',
+			'core.page_header'					=> 'load_matomoanalytics',
+			'core.validate_config_variable'		=> 'validate_matomoanalytics_url',
 		];
 	}
 
 	/**
-	 * Load Google Analytics js code
+	 * Load Matomo Analytics js code
 	 *
 	 * @return void
 	 * @access public
 	 */
-	public function load_google_analytics()
+	public function load_matomoanalytics()
 	{
 		$this->template->assign_vars([
-			'GOOGLEANALYTICS_ID'		=> $this->config['googleanalytics_id'],
-			'GOOGLEANALYTICS_TAG'		=> $this->config['googleanalytics_tag'],
-			'GOOGLEANALYTICS_USER_ID'	=> $this->user->data['user_id'],
-			'S_ANONYMIZE_IP'			=> $this->config['ga_anonymize_ip'],
+			'MATOMOANALYTICS_ENABLED'	=> $this->config['matomoanalytics_enabled'],
+			'MATOMOANALYTICS_URL'		=> $this->config['matomoanalytics_url'],
+			'MATOMOANALYTICS_SITE_ID'	=> $this->config['matomoanalytics_site_id'],
 		]);
 	}
 
@@ -89,48 +88,43 @@ class listener implements EventSubscriberInterface
 	 * @return void
 	 * @access public
 	 */
-	public function add_googleanalytics_configs($event)
+	public function add_matomoanalytics_configs($event)
 	{
 		// Add a config to the settings mode, after warnings_expire_days
 		if ($event['mode'] === 'settings' && isset($event['display_vars']['vars']['warnings_expire_days']))
 		{
 			// Load language file
-			$this->language->add_lang('googleanalytics_acp', 'phpbb/googleanalytics');
+			$this->language->add_lang('matomoanalytics_acp', 'cube/matomoanalytics');
 
 			// Store display_vars event in a local variable
 			$display_vars = $event['display_vars'];
 
 			// Define the new config vars
-			$ga_config_vars = [
-				'legend_googleanalytics' => 'ACP_GOOGLEANALYTICS',
-				'googleanalytics_id' => [
-					'lang'		=> 'ACP_GOOGLEANALYTICS_ID',
-					'validate'	=> 'googleanalytics_id',
-					'type'		=> 'text:40:20',
-					'explain'	=> true,
-				],
-				'ga_anonymize_ip' => [
-					'lang'		=> 'ACP_GA_ANONYMIZE_IP',
+			$matomo_config_vars = [
+				'legend_matomoanalytics' => 'ACP_MATOMOANALYTICS',
+				'matomoanalytics_enabled' => [
+					'lang'		=> 'ACP_MATOMOANALYTICS_ENABLE',
 					'validate'	=> 'bool',
 					'type'		=> 'radio:yes_no',
 					'explain'	=> true,
 				],
-				'googleanalytics_tag' => [
-					'lang'		=> 'ACP_GOOGLEANALYTICS_TAG',
-					'validate'	=> 'int',
-					'type'		=> 'select',
-					'function'	=> 'build_select',
-					'params'	=> [[
-						0	=> 'ACP_GA_ANALYTICS_TAG',
-						1	=> 'ACP_GA_GTAGS_TAG',
-					], '{CONFIG_VALUE}'],
+				'matomoanalytics_url' => [
+					'lang'		=> 'ACP_MATOMOANALYTICS_URL',
+					'validate'	=> 'matomoanalytics_url',
+					'type'		=> 'text:40:255',
+					'explain'	=> true,
+				],
+				'matomoanalytics_site_id' => [
+					'lang'		=> 'ACP_MATOMOANALYTICS_SITE_ID',
+					'validate'	=> 'int:0',
+					'type'		=> 'number:1',
 					'explain'	=> true,
 				],
 			];
 
 			// Add the new config vars after warnings_expire_days in the display_vars config array
 			$insert_after = ['after' => 'warnings_expire_days'];
-			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $ga_config_vars, $insert_after);
+			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $matomo_config_vars, $insert_after);
 
 			// Update the display_vars event with the new array
 			$event['display_vars'] = $display_vars;
@@ -138,34 +132,28 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Validate the Google Analytics ID
+	 * Validate the Matomo Analytics ID
 	 *
 	 * @param \phpbb\event\data $event The event object
 	 * @return void
 	 * @access public
 	 */
-	public function validate_googleanalytics_id($event)
+	public function validate_matomoanalytics_url($event)
 	{
-		// Check if the validate test is for google_analytics
-		if ($event['config_definition']['validate'] !== 'googleanalytics_id' || empty($event['cfg_array']['googleanalytics_id']))
+		// Check if the validate test is for matomo_analytics and matomo is enabled
+		if ($event['config_definition']['validate'] !== 'matomoanalytics_url'|| !$event['cfg_array']['matomoanalytics_enabled'])
 		{
 			return;
 		}
 
 		// Store the input and error event data
-		$input = $event['cfg_array']['googleanalytics_id'];
+		$input = $event['cfg_array']['matomoanalytics_url'];
 		$error = $event['error'];
 
-		// Add error message if the input is not a valid Google Analytics ID
-		if (!preg_match('/^UA-\d{4,9}-\d{1,4}$|^G-[A-Z0-9]{10}$/', $input))
+		// Add error message if the input is not a valid URL
+		if (!preg_match('/^https?:\/\/.*\/$/', $input))
 		{
-			$error[] = $this->language->lang('ACP_GOOGLEANALYTICS_ID_INVALID', $input);
-		}
-
-		// Add error message if GTAG is not selected for use with a Measurement ID
-		if ((int) $event['cfg_array']['googleanalytics_tag'] === 0 && preg_match('/^G-[A-Z0-9]{10}$/', $input))
-		{
-			$error[] = $this->language->lang('ACP_GOOGLEANALYTICS_TAG_INVALID', $input);
+			$error[] = $this->language->lang('ACP_MATOMOANALYTICS_URL_INVALID', $input);
 		}
 
 		// Update error event data
