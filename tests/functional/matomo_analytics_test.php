@@ -81,6 +81,19 @@ class matomo_analytics_test extends \phpbb_functional_test_case
 	 */
 	public function test_matomoanalytics_code()
 	{
+		// Matomo Analytics installs in a disabled state. We need to turn it on to test it.
+		$this->get_db();
+
+		$sql = "UPDATE phpbb_config SET config_value = '1' WHERE config_name = 'matomoanalytics_enabled'";
+		$this->db->sql_query($sql);
+		$sql = "UPDATE phpbb_config SET config_value = 'https://example.com/' WHERE config_name = 'matomoanalytics_url'";
+		$this->db->sql_query($sql);
+		$sql = "UPDATE phpbb_config SET config_value = '1' WHERE config_name = 'matomoanalytics_site_id'";
+		$this->db->sql_query($sql);
+
+		$this->purge_cache();
+
+
 		// check if the code aprears in the pages head:
 		$crawler = self::request('GET', 'index.php');
 		self::assertStringContainsString("<!-- Matomo -->", $crawler->filter('head')->html());
