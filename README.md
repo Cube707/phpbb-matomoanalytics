@@ -7,7 +7,7 @@ extention.
 
 ## Install
 
-1. [Download the latest validated release]().
+1. [Download the latest validated release](https://github.com/Cube707/phpbb-matomoanalytics/releases).
 2. Unzip the downloaded release and copy it to the `ext` directory of your phpBB board.
 3. Navigate in the ACP to `Customise -> Manage extensions`.
 4. Look for `Matomo Analytics` under the Disabled Extensions list, and click its `Enable` link.
