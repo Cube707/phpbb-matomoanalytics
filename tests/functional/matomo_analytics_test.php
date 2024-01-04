@@ -1,22 +1,22 @@
 <?php
 /**
  *
- * Google Analytics extension for the phpBB Forum Software package.
+ * Matomo Analytics extension for the phpBB Forum Software package.
  *
  * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-namespace phpbb\googleanalytics\tests\functional;
+namespace cube\matomoanalytics\tests\functional;
 
 /**
  * @group functional
  */
-class google_analytics_test extends \phpbb_functional_test_case
+class matomo_analytics_test extends \phpbb_functional_test_case
 {
 	/** @var string */
-	protected $sample_ga_code = 'UA-000000-00';
+	protected $sample_matomo_url = 'https://example.com/';
 
 	/**
 	 * Define the extensions to be tested
@@ -25,11 +25,11 @@ class google_analytics_test extends \phpbb_functional_test_case
 	 */
 	protected static function setup_extensions()
 	{
-		return ['phpbb/googleanalytics'];
+		return ['cube/matomoanalytics'];
 	}
 
 	/**
-	 * Test Google Analytics ACP page and save settings
+	 * Test Matomo Analytics ACP page and save settings
 	 */
 	public function test_set_acp_settings()
 	{
@@ -38,14 +38,14 @@ class google_analytics_test extends \phpbb_functional_test_case
 
 		// Add language files
 		$this->add_lang('acp/board');
-		$this->add_lang_ext('phpbb/googleanalytics', 'googleanalytics_acp');
+		$this->add_lang_ext('cube/matomoanalytics', 'matomoanalytics_acp');
 
 		$found = false;
 
 		// Load ACP board settings page
 		$crawler = self::request('GET', 'adm/index.php?i=acp_board&mode=settings&sid=' . $this->sid);
 
-		// Test that GA settings field is found in the correct position (after WARNINGS_EXPIRE)
+		// Test that Matomo settings field is found in the correct position (after WARNINGS_EXPIRE)
 		$nodes = $crawler->filter('#acp_board > fieldset > dl > dt > label')->extract(['_text']);
 		foreach ($nodes as $key => $config_name)
 		{
@@ -56,19 +56,19 @@ class google_analytics_test extends \phpbb_functional_test_case
 
 			$found = true;
 
-			$this->assertContainsLang('ACP_GOOGLEANALYTICS_ID', $nodes[$key + 1]);
+			$this->assertContainsLang('ACP_MATOMOANALYTICS_ENABLE', $nodes[$key + 1]);
 		}
 
-		// If GA settings not found where expected, test if they exist on page at all
+		// If MATOMO settings not found where expected, test if they exist on page at all
 		if (!$found)
 		{
-			$this->assertContainsLang('ACP_GOOGLEANALYTICS_ID', $crawler->text());
+			$this->assertContainsLang('ACP_MATOMOANALYTICS_ENABLE', $crawler->text());
 		}
 
-		// Set GA form values
+		// Set MATOMO form values
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$values = $form->getValues();
-		$values['config[googleanalytics_id]'] = $this->sample_ga_code;
+		$values['config[matomoanalytics_url]'] = $this->sample_matomo_url;
 		$form->setValues($values);
 
 		// Submit form and test success
@@ -77,11 +77,12 @@ class google_analytics_test extends \phpbb_functional_test_case
 	}
 
 	/**
-	 * Test Google Analytics code appears as expected
+	 * Test Matomo Analytics code appears as expected
 	 */
-	public function test_google_analytics_code()
+	public function test_matomoanalytics_code()
 	{
+		// check if the code aprears in the pages head:
 		$crawler = self::request('GET', 'index.php');
-		self::assertStringContainsString($this->sample_ga_code, $crawler->filter('head > script')->eq(1)->text());
+		self::assertStringContainsString("<!-- Matomo -->", $crawler->filter('head')->html());
 	}
 }

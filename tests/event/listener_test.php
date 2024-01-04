@@ -1,20 +1,20 @@
 <?php
 /**
  *
- * Google Analytics extension for the phpBB Forum Software package.
+ * Matomo Analytics extension for the phpBB Forum Software package.
  *
  * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-namespace phpbb\googleanalytics\tests\event;
+namespace cube\matomoanalytics\tests\event;
 
 require_once __DIR__ . '/../../../../../includes/functions_acp.php';
 
 class listener_test extends \phpbb_test_case
 {
-	/** @var \phpbb\googleanalytics\event\listener */
+	/** @var \cube\matomoanalytics\event\listener */
 	protected $listener;
 
 	/** @var \phpbb\config\config */
@@ -40,8 +40,9 @@ class listener_test extends \phpbb_test_case
 
 		// Load/Mock classes required by the event listener class
 		$this->config = new \phpbb\config\config([
-			'googleanalytics_id' => 'UA-000000-01',
-			'ga_anonymize_ip' => 0,
+			'matomoanalytics_enabled' => true,
+			'matomoanalytics_url' => 'https://example.com/',
+			'matomoanalytics_site_id' => 1,
 		]);
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
@@ -57,7 +58,7 @@ class listener_test extends \phpbb_test_case
 	 */
 	protected function set_listener()
 	{
-		$this->listener = new \phpbb\googleanalytics\event\listener(
+		$this->listener = new \cube\matomoanalytics\event\listener(
 			$this->config,
 			$this->lang,
 			$this->template,
@@ -83,42 +84,41 @@ class listener_test extends \phpbb_test_case
 			'core.acp_board_config_edit_add',
 			'core.page_header',
 			'core.validate_config_variable',
-		], array_keys(\phpbb\googleanalytics\event\listener::getSubscribedEvents()));
+		], array_keys(\cube\matomoanalytics\event\listener::getSubscribedEvents()));
 	}
 
 	/**
-	 * Test the load_google_analytics event
+	 * Test the load_matomoanalytics event
 	 */
-	public function test_load_google_analytics()
+	public function test_load_matomoanalytics()
 	{
 		$this->set_listener();
 
 		$this->template->expects(self::once())
 			->method('assign_vars')
 			->with([
-				'GOOGLEANALYTICS_ID'		=> $this->config['googleanalytics_id'],
-				'GOOGLEANALYTICS_TAG'		=> $this->config['googleanalytics_tag'],
-				'GOOGLEANALYTICS_USER_ID'	=> $this->user->data['user_id'],
-				'S_ANONYMIZE_IP'			=> $this->config['ga_anonymize_ip'],
+				'MATOMOANALYTICS_ENABLED'	=> $this->config['matomoanalytics_enabled'],
+				'MATOMOANALYTICS_URL'		=> $this->config['matomoanalytics_url'],
+				'MATOMOANALYTICS_SITE_ID'	=> $this->config['matomoanalytics_site_id'],
 			]);
 
 		$dispatcher = new \phpbb\event\dispatcher();
-		$dispatcher->addListener('core.page_header', [$this->listener, 'load_google_analytics']);
+		$dispatcher->addListener('core.page_header', [$this->listener, 'load_matomoanalytics']);
 		$dispatcher->trigger_event('core.page_header');
 	}
 
 	/**
-	 * Data set for test_add_googleanalytics_configs
+	 * Data set for test_add_matomoanalytics_configs
 	 *
 	 * @return array Array of test data
 	 */
-	public function add_googleanalytics_configs_data()
+	public function add_matomoanalytics_configs_data()
 	{
 		return [
 			[ // expected config and mode
 			  'settings',
 			  ['vars' => ['warnings_expire_days' => []]],
-			  ['warnings_expire_days', 'legend_googleanalytics', 'googleanalytics_id', 'ga_anonymize_ip', 'googleanalytics_tag'],
+			  ['warnings_expire_days', 'legend_matomoanalytics', 'matomoanalytics_enabled', 'matomoanalytics_url', 'matomoanalytics_site_id'],
 			],
 			[ // unexpected mode
 			  'foobar',
@@ -139,16 +139,16 @@ class listener_test extends \phpbb_test_case
 	}
 
 	/**
-	 * Test the add_googleanalytics_configs event
+	 * Test the add_matomoanalytics_configs event
 	 *
-	 * @dataProvider add_googleanalytics_configs_data
+	 * @dataProvider add_matomoanalytics_configs_data
 	 */
-	public function test_add_googleanalytics_configs($mode, $display_vars, $expected_keys)
+	public function test_add_matomoanalytics_configs($mode, $display_vars, $expected_keys)
 	{
 		$this->set_listener();
 
 		$dispatcher = new \phpbb\event\dispatcher();
-		$dispatcher->addListener('core.acp_board_config_edit_add', [$this->listener, 'add_googleanalytics_configs']);
+		$dispatcher->addListener('core.acp_board_config_edit_add', [$this->listener, 'add_matomoanalytics_configs']);
 
 		$event_data = ['display_vars', 'mode'];
 		$event_data_after = $dispatcher->trigger_event('core.acp_board_config_edit_add', compact($event_data));
@@ -160,81 +160,71 @@ class listener_test extends \phpbb_test_case
 	}
 
 	/**
-	 * Data set for test_validate_googleanalytics_id
+	 * Data set for test_validate_matomoanalytics_url
 	 *
 	 * @return array Array of test data
 	 */
-	public function validate_googleanalytics_id_data()
+	public function validate_matomoanalytics_url_data()
 	{
 		return [
 			[
-				// valid code, no error
-				['googleanalytics_id' => 'UA-1234-56', 'googleanalytics_tag' => 0],
+				// valid url, no error
+				['matomoanalytics_url' => 'https://example.com/', 'matomoanalytics_enabled' => true],
 				[],
 			],
 			[
-				// valid code, no error
-				['googleanalytics_id' => 'UA-1234-56', 'googleanalytics_tag' => 1],
+				// valid url, no error
+				['matomoanalytics_url' =>'https://sub.example.com/', 'matomoanalytics_enabled' => true],
 				[],
 			],
 			[
-				// valid code, no error
-				['googleanalytics_id' => 'G-A1B2C3D4E5', 'googleanalytics_tag' => 1],
+				// valid url, no error
+				['matomoanalytics_url' =>'https://example.com/path/', 'matomoanalytics_enabled' => true],
 				[],
 			],
 			[
-				// no code, no error
-				['googleanalytics_id' => '', 'googleanalytics_tag' => 1],
+				// valid url, no error
+				['matomoanalytics_url' => 'http://example.com/', 'matomoanalytics_enabled' => true],
 				[],
 			],
 			[
-				// no googleanalytics_id, no error
-				['foo' => 'bar'],
+				// missing trainling slash, error
+				['matomoanalytics_url' => 'http://example.com', 'matomoanalytics_enabled' => true],
+				['ACP_MATOMOANALYTICS_URL_INVALID'],
+			],
+			[
+				// empty url + enabled, error
+				['matomoanalytics_url' => '', 'matomoanalytics_enabled' => true],
+				['ACP_MATOMOANALYTICS_URL_INVALID'],
+			],
+			[
+				// invalid url + enabled, error
+				['matomoanalytics_url' => 'httsp://examplecom', 'matomoanalytics_enabled' => true],
+				['ACP_MATOMOANALYTICS_URL_INVALID'],
+			],
+			[
+				// empty url + disabled, no error
+				['matomoanalytics_url' => '', 'matomoanalytics_enabled' => false],
 				[],
-			],
-			[
-				// invalid code, error
-				['googleanalytics_id' => 'G-A1B2C3D4E5', 'googleanalytics_tag' => 0],
-				['ACP_GOOGLEANALYTICS_TAG_INVALID'],
-			],
-			[
-				// invalid code, error
-				['googleanalytics_id' => 'UA-12-34', 'googleanalytics_tag' => 1],
-				['ACP_GOOGLEANALYTICS_ID_INVALID'],
-			],
-			[
-				// invalid code, error
-				['googleanalytics_id' => 'UA-01234-56789', 'googleanalytics_tag' => 1],
-				['ACP_GOOGLEANALYTICS_ID_INVALID'],
-			],
-			[
-				// invalid code, error
-				['googleanalytics_id' => 'AU-1234-56', 'googleanalytics_tag' => 1],
-				['ACP_GOOGLEANALYTICS_ID_INVALID'],
-			],
-			[
-				// invalid code, error
-				['googleanalytics_id' => 'foo-bar-foo', 'googleanalytics_tag' => 1],
-				['ACP_GOOGLEANALYTICS_ID_INVALID'],
 			],
 		];
 	}
 
 	/**
-	 * Test the validate_googleanalytics_id event
+	 * Test the validate_matomoanalytics_url event
 	 *
-	 * @dataProvider validate_googleanalytics_id_data
+	 * @dataProvider validate_matomoanalytics_url_data
 	 */
-	public function test_validate_googleanalytics_id($cfg_array, $expected_error)
+	public function test_validate_matomoanalytics_url($cfg_array, $expected_error)
 	{
 		$this->set_listener();
 
 		$config_name = key($cfg_array);
-		$config_definition = ['validate' => 'googleanalytics_id'];
+		$config_definition = ['validate' => 'matomoanalytics_url'];
 		$error = [];
 
 		$dispatcher = new \phpbb\event\dispatcher();
-		$dispatcher->addListener('core.validate_config_variable', [$this->listener, 'validate_googleanalytics_id']);
+		$dispatcher->addListener('core.validate_config_variable', [$this->listener, 'validate_matomoanalytics_url']);
 
 		$event_data = ['cfg_array', 'config_name', 'config_definition', 'error'];
 		$event_data_after = $dispatcher->trigger_event('core.validate_config_variable', compact($event_data));
