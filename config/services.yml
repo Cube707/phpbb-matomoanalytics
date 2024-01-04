@@ -1,6 +1,6 @@
 services:
-    phpbb.googleanalytics.listener:
-        class: phpbb\googleanalytics\event\listener
+    cube.matomoanalytics.listener:
+        class: cube\matomoanalytics\event\listener
         arguments:
             - '@config'
             - '@language'
