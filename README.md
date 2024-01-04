@@ -1,9 +1,10 @@
 # Matomo Analytics Extension
 
 A phpBB extension that allows administrators to easily add Matomo Analytics to their forums. This is a fork of the official phpbb-googleanalytics
-extention. 
+extention.
 
 [![Build Status](https://github.com/Cube707/phpbb-matomoanalytics/workflows/Tests/badge.svg)](https://github.com/Cube707/phpbb-matomoanalytics/actions)
+[![codecov](https://codecov.io/gh/Cube707/phpbb-matomoanalytics/branch/master/graph/badge.svg?token=1HQh953sBs)](https://codecov.io/gh/Cube707/phpbb-matomoanalytics)
 
 ## Install
 
@@ -20,4 +21,4 @@ extention.
 3. To permanently uninstall, click `Delete Data` and then delete the `/ext/cube/matomoanalytics` directory.
 
 ## License
-[GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
+[GNU General Public License v2](https://opensource.org/licenses/GPL-2.0)
