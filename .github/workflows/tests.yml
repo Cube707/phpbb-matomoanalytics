@@ -195,7 +195,9 @@ jobs:
                   DB: ${{steps.database-type.outputs.db}}
                   PHP_VERSION: ${{ matrix.php }}
                   NOTESTS: '0'
-              run: .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
+              run: |
+                  composer self-update --2.2
+                  .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
               working-directory: ./phpBB3
 
             - name: Setup database
@@ -331,7 +333,9 @@ jobs:
                   DB: ${{steps.database-type.outputs.db}}
                   PHP_VERSION: ${{ matrix.php }}
                   NOTESTS: '0'
-              run: .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
+              run: |
+                  composer self-update --2.2
+                  .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
               working-directory: ./phpBB3
 
             - name: Setup database
@@ -431,7 +435,9 @@ jobs:
                   DB: ${{steps.database-type.outputs.db}}
                   PHP_VERSION: ${{ matrix.php }}
                   NOTESTS: '0'
-              run: .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
+              run: |
+                  composer self-update --2.2
+                  .github/setup-phpbb.sh $DB $PHP_VERSION ${NOTESTS:-0}
               working-directory: ./phpBB3
 
             - name: Setup database
