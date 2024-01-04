@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Google Analytics Extension Builder" description="Builds an extension.zip from a git repository" default="all">
-	<property name="vendor-name" value="phpbb" />
-	<property name="extension-name" value="googleanalytics" />
+<project name="Matomo Analytics Extension Builder" description="Builds an extension.zip from a git repository" default="all">
+	<property name="vendor-name" value="cube" />
+	<property name="extension-name" value="matomoanalytics" />
 	<!--
 	Only set this to "true" if you have dependencies in the composer.json,
 	otherwise use "false".

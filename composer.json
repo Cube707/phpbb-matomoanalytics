@@ -1,37 +1,43 @@
 {
-	"name": "phpbb/googleanalytics",
+	"name": "cube/matomoanalytics",
 	"type": "phpbb-extension",
-	"description": "A phpBB official extension that allows administrators to easily add Google Analytics to their forums.",
-	"homepage": "https://www.phpbb.com",
-	"version": "1.1.0-dev",
-	"keywords": ["phpbb", "extension", "google", "analytics"],
+	"description": "A extention to allow easy integration of the matomo tracking code. Forked from the official phpbb-googleanalytics extention.",
+	"homepage": "https://github.com/Cube707/phpbb-matomoanalytics",
+	"version": "0.0.1-dev",
+	"keywords": ["phpbb", "extension", "matomo", "analytics"],
 	"license": "GPL-2.0-only",
 	"authors": [
+		{
+			"name": "Jan Wille",
+			"email": "mail@janwille.de",
+			"homepage": "https://janwille.de",
+			"role": "Extension Developer"
+		},
 		{
 			"name": "Marc Alexander",
 			"email": "admin@m-a-styles.de",
 			"homepage": "http://www.m-a-styles.de",
-			"role": "Extensions Team Consultant"
+			"role": "Upstream Extensions Team Consultant"
 		},
 		{
 			"name": "Michael Cullum",
 			"homepage": "http://michaelcullum.com",
 			"email": "michael@phpbb.com",
-			"role": "Extensions Team Consultant"
+			"role": "Upstream Extensions Team Consultant"
 		},
 		{
 			"name": "Matt Friedman",
 			"homepage": "https://imattpro.github.io",
-			"role": "Extensions Development Team Lead"
+			"role": "Upstream Extensions Development Team Lead"
 		},
 		{
 			"name": "Nathan Guse",
 			"email": "nathaniel.guse@gmail.com",
-			"role": "Former Extensions Development Team Lead"
+			"role": "Upstream Former Extensions Development Team Lead"
 		},
 		{
 			"name": "Lukasz Kaczynski",
-			"role": "Extensions Development Team"
+			"role": "Upstream Extensions Development Team"
 		}
 	],
 	"require": {
@@ -42,15 +48,9 @@
 		"phing/phing": "2.4.*"
 	},
 	"extra": {
-		"display-name": "Google Analytics",
+		"display-name": "Matomo Analytics",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.2.0"
-		},
-		"version-check": {
-			"host": "www.phpbb.com",
-			"directory": "/customise/db/extension/googleanalytics",
-			"filename": "version_check",
-			"ssl": true
 		}
 	}
 }

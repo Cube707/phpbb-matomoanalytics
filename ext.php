@@ -1,14 +1,14 @@
 <?php
 /**
  *
- * Google Analytics extension for the phpBB Forum Software package.
+ * Matomo Analytics extension for the phpBB Forum Software package.
  *
  * @copyright (c) 2021 phpBB Limited <https://www.phpbb.com>
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-namespace phpbb\googleanalytics;
+namespace cube\matomoanalytics;
 
 use phpbb\extension\base;
 
