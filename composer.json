@@ -11,7 +11,7 @@
 			"name": "Jan Wille",
 			"email": "mail@janwille.de",
 			"homepage": "https://janwille.de",
-			"role": "Extension Developer"
+			"role": "Upstream Extension Developer"
 		},
 		{
 			"name": "Marc Alexander",
@@ -45,7 +45,7 @@
 		"composer/installers": "~1.0"
 	},
 	"require-dev": {
-		"phing/phing": "2.4.*"
+		"phing/phing": "~2.4"
 	},
 	"extra": {
 		"display-name": "Matomo Analytics",

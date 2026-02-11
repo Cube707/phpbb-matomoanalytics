@@ -10,8 +10,6 @@
 
 namespace cube\matomoanalytics\tests\event;
 
-require_once __DIR__ . '/../../../../../includes/functions_acp.php';
-
 class listener_test extends \phpbb_test_case
 {
 	/** @var \cube\matomoanalytics\event\listener */
@@ -21,13 +19,22 @@ class listener_test extends \phpbb_test_case
 	protected $config;
 
 	/** @var \phpbb\language\language */
-	protected $lang;
+	protected $language;
 
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
 	protected $user;
+
+	public static function setUpBeforeClass(): void
+	{
+		$acp_functions = __DIR__ . '/../../../../../includes/functions_acp.php';
+		if (is_file($acp_functions))
+		{
+			require_once $acp_functions;
+		}
+	}
 
 	/**
 	 * Setup test environment
@@ -47,8 +54,8 @@ class listener_test extends \phpbb_test_case
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
-		$this->lang = new \phpbb\language\language($lang_loader);
-		$this->user = new \phpbb\user($this->lang, '\phpbb\datetime');
+		$this->language = new \phpbb\language\language($lang_loader);
+		$this->user = new \phpbb\user($this->language, '\phpbb\datetime');
 		$this->user->data['user_id'] = 2;
 		$this->user->data['is_registered'] = true;
 	}
@@ -60,7 +67,7 @@ class listener_test extends \phpbb_test_case
 	{
 		$this->listener = new \cube\matomoanalytics\event\listener(
 			$this->config,
-			$this->lang,
+			$this->language,
 			$this->template,
 			$this->user
 		);
@@ -81,8 +88,8 @@ class listener_test extends \phpbb_test_case
 	public function test_getSubscribedEvents()
 	{
 		self::assertEquals([
-			'core.acp_board_config_edit_add',
 			'core.page_header',
+			'core.acp_board_config_edit_add',
 			'core.validate_config_variable',
 		], array_keys(\cube\matomoanalytics\event\listener::getSubscribedEvents()));
 	}
@@ -138,7 +145,7 @@ class listener_test extends \phpbb_test_case
 		];
 	}
 
-	/**
+	/** 
 	 * Test the add_matomoanalytics_configs event
 	 *
 	 * @dataProvider add_matomoanalytics_configs_data
@@ -152,7 +159,7 @@ class listener_test extends \phpbb_test_case
 
 		$event_data = ['display_vars', 'mode'];
 		$event_data_after = $dispatcher->trigger_event('core.acp_board_config_edit_add', compact($event_data));
-		extract($event_data_after, EXTR_OVERWRITE);
+		extract($event_data_after);
 
 		$keys = array_keys($display_vars['vars']);
 
@@ -233,7 +240,7 @@ class listener_test extends \phpbb_test_case
 		{
 			self::assertArrayHasKey($expected, $event_data_after);
 		}
-		extract($event_data_after, EXTR_OVERWRITE);
+		extract($event_data_after);
 
 		self::assertEquals($expected_error, $error);
 	}
