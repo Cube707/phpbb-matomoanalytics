@@ -40,11 +40,11 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS'					=> 'Matomo Analytics',
 	'ACP_MATOMOANALYTICS_ENABLE'			=> 'Use Matomo',
-	'ACP_MATOMOANALYTICS_ENABLE_EXPLAIN'	=> 'Enable/disable Matomo for the howle website.',
+	'ACP_MATOMOANALYTICS_ENABLE_EXPLAIN'	=> 'Enable/disable Matomo for the whole website.',
 	'ACP_MATOMOANALYTICS_URL'				=> 'Matomo Tracker URL',
-	'ACP_MATOMOANALYTICS_URL_EXPLAIN'		=> 'The URL of your Matomo-instanz. You can find it in the webinterface inside the JavaScript-Tracking-Code right behind <i>var u=</i>.',
-	'ACP_MATOMOANALYTICS_URL_INVALID'		=> 'The Matomo Tracker URL musst match this fomat: <i>http(s)://example.com/</i> (note the trailing slash)',
+	'ACP_MATOMOANALYTICS_URL_EXPLAIN'		=> 'The URL of your Matomo-instanz. You can find it in the web interface inside the JavaScript-Tracking-Code right behind <i>var u=</i>.',
+	'ACP_MATOMOANALYTICS_URL_INVALID'		=> 'The Matomo Tracker URL must match this format: <i>http(s)://example.com/</i> (note the trailing slash)',
 	'ACP_MATOMOANALYTICS_SITE_ID'			=> 'Website ID',
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'The ID of your website from Matomo.',
-	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID bust be a positiv integer.',
+	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID must be a positive integer.',
 ));
