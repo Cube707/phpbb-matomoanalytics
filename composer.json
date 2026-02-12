@@ -11,8 +11,14 @@
 			"name": "Jan Wille",
 			"email": "mail@janwille.de",
 			"homepage": "https://janwille.de",
-			"role": "Upstream Extension Developer"
+			"role": "Extension Developer"
 		},
+        {
+            "name": "Zorglube",
+            "email": "630192+zorglube@users.noreply.github.com",
+            "homepage": "https://blog.broncotoxique.com",
+            "role": "Extension Contributor"
+        },
 		{
 			"name": "Marc Alexander",
 			"email": "admin@m-a-styles.de",

@@ -25,7 +25,7 @@ jobs:
         name: Extension tests
         uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@3.3.x
         with:
-            EXTNAME: phpbb/googleanalytics # Your extension vendor/package name
+            EXTNAME: cube/matomoanalytics # Your extension vendor/package name
             CODECOV: 1                     # Run code coverage via codecov? 1 or 0
         secrets:
             CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} # Do not change this

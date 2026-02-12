@@ -145,7 +145,7 @@ class listener_test extends \phpbb_test_case
 		];
 	}
 
-	/** 
+	/**
 	 * Test the add_matomoanalytics_configs event
 	 *
 	 * @dataProvider add_matomoanalytics_configs_data
