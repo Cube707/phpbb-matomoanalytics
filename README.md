@@ -4,7 +4,7 @@ A phpBB extension that allows administrators to easily add Matomo Analytics to t
 extention.
 
 [![Build Status](https://github.com/Cube707/phpbb-matomoanalytics/workflows/Tests/badge.svg)](https://github.com/Cube707/phpbb-matomoanalytics/actions)
-[![codecov](https://codecov.io/gh/Cube707/phpbb-matomoanalytics/branch/master/graph/badge.svg?token=1HQh953sBs)](https://codecov.io/gh/Cube707/phpbb-matomoanalytics)
+[![codecov](https://codecov.io/gh/Cube707/phpbb-matomoanalytics/graph/badge.svg?token=8TYBD43FQD)](https://codecov.io/gh/Cube707/phpbb-matomoanalytics)
 
 ## Install
 
