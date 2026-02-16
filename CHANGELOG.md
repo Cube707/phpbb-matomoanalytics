@@ -2,6 +2,11 @@
 
 ## 1.0.7 - 2026-01-13
 
+- add french translation
+- fix spelling
+
+## 1.0.6 - 2026-01-12
+
 - sync version with upstream
 - merge new testing setup
 
