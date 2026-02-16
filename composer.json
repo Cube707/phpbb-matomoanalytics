@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "A extention to allow easy integration of the matomo tracking code. Forked from the official phpbb-googleanalytics extention.",
 	"homepage": "https://github.com/Cube707/phpbb-matomoanalytics",
-	"version": "1.0.7",
+	"version": "1.1.0",
 	"keywords": ["phpbb", "extension", "matomo", "analytics"],
 	"license": "GPL-2.0-only",
 	"authors": [

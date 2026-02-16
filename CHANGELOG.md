@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 - 2026-02-16
+
+- add privacy information
+
 ## 1.0.7 - 2026-01-13
 
 - add french translation
