@@ -47,4 +47,5 @@ $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS_SITE_ID'			=> 'Webseiten ID',
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'Die ID deiner Webseite inerhalb von Matomo.',
 	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID muss eine positive ganze zahl sein.',
+	'ACP_MATOMOANALYTICS_NOSCRIPT_ENABLE'  => 'Aktivieren Sie den NoScript-Code für Benutzer ohne JavaScript.',
 ));
