@@ -122,11 +122,11 @@ class listener implements EventSubscriberInterface
 					'explain'	=> true,
 				],
 				'matomoanalytics_noscript_enabled' => [
-                    'lang'      => 'ACP_MATOMOANALYTICS_NOSCRIPT_ENABLE',
-                    'validate'  => 'bool',
-                    'type'      => 'radio:yes_no',
-                    'explain'   => true,
-                ],
+					'lang'		=> 'ACP_MATOMOANALYTICS_NOSCRIPT_ENABLE',
+					'validate'	=> 'bool',
+					'type'		=> 'radio:yes_no',
+					'explain'	=> true,
+				],
 			];
 
 			// Add the new config vars after warnings_expire_days in the display_vars config array
