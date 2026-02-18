@@ -75,9 +75,12 @@ class listener implements EventSubscriberInterface
 	public function load_matomoanalytics()
 	{
 		$this->template->assign_vars([
-			'MATOMOANALYTICS_ENABLED'	=> $this->config['matomoanalytics_enabled'],
-			'MATOMOANALYTICS_URL'		=> $this->config['matomoanalytics_url'],
-			'MATOMOANALYTICS_SITE_ID'	=> $this->config['matomoanalytics_site_id'],
+			'MATOMOANALYTICS_ENABLED'			=> $this->config['matomoanalytics_enabled'],
+			'MATOMOANALYTICS_URL'				=> $this->config['matomoanalytics_url'],
+			'MATOMOANALYTICS_SITE_ID'			=> $this->config['matomoanalytics_site_id'],
+			'MATOMOANALYTICS_USER_ID_ENABLED'	=> $this->config['matomoanalytics_user_id_enabled'],
+			'MATOMOANALYTICS_USER_ID'			=> $this->user->data['username'],
+			'MATOMOANALYTICS_HEARTBEAT'			=> $this->config['matomoanalytics_heartbeat'],
 		]);
 	}
 
@@ -118,6 +121,18 @@ class listener implements EventSubscriberInterface
 					'lang'		=> 'ACP_MATOMOANALYTICS_SITE_ID',
 					'validate'	=> 'int:0',
 					'type'		=> 'number:1',
+					'explain'	=> true,
+				],
+				'matomoanalytics_user_id_enabled' => [
+					'lang'		=> 'ACP_MATOMOANALYTICS_USER_ID_ENABLED',
+					'validate'	=> 'bool',
+					'type'		=> 'radio:yes_no',
+					'explain'	=> true,
+				],
+				'matomoanalytics_heartbeat' => [
+					'lang'		=> 'ACP_MATOMOANALYTICS_HEARTBEAT',
+					'validate'	=> 'int:0',
+					'type'		=> 'number:0',
 					'explain'	=> true,
 				],
 			];
