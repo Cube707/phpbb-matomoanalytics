@@ -48,5 +48,5 @@ $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'The ID of your website from Matomo.',
 	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID bust be a positiv integer.',
 	'ACP_MATOMOANALYTICS_USER_ID_ENABLED'	=> 'Include Username into statistics. Only if the user is logged',
-	'ACP_MATOMOANALYTICS_HEARTBEAT'			=> 'Enable a heartbeat timer to get more accurate visit lengths by sending periodical HTTP ping requests as long as the site is opened. Enter the time between the pings in seconds (Matomo default: 15) to enable or 0 to disable this feature. Note: This will cause a lot of additional HTTP requests on your site.'
+	'ACP_MATOMOANALYTICS_HEARTBEAT'			=> 'Enable a heartbeat timer to get more accurate visit lengths by sending periodical HTTP ping requests as long as the site is opened. Enter the time between the pings in seconds (Matomo default: 15) to enable or 0 to disable this feature. Note: This will cause a lot of additional HTTP requests on your site.',
 ));
