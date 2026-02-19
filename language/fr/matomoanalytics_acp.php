@@ -47,6 +47,11 @@ $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS_SITE_ID'			=> 'Website ID',
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'L\'identifiant de votre site web fourni par Matomo.',
 	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID doit être un entier positif.',
+<<<<<<< HEAD
     'ACP_MATOMOANALYTICS_USER_ID_ENABLED'   => 'Incrlue le pseudonyme de l\'utilisateur dans les statistics. Ne fonctionne que si l\'utilisateur est connecté.',
     'ACP_MATOMOANALYTICS_HEARTBEAT'         => 'Activez un système de surveillance (heartbeat) pour obtenir des durées de visite plus précises. Ce système envoie des requêtes HTTP périodiques tant que le site est ouvert. Configurez l\'intervalle entre les requêtes pour activer cette fonctionnalité (15s est la valeur recommandé par Matomo), ou 0s pour désactiver. Attention: cette opération générera un grand nombre de requêtes HTTP supplémentaires sur votre site.',
+=======
+	'ACP_MATOMOANALYTICS_USER_ID_ENABLED'	=> 'Incrlue le pseudonyme de l\'utilisateur dans les statistics. Ne fonctionne que si l\'utilisateur est connecté.',
+	'ACP_MATOMOANALYTICS_HEARTBEAT'			=> 'Activez un système de surveillance (heartbeat) pour obtenir des durées de visite plus précises. Ce système envoie des requêtes HTTP périodiques tant que le site est ouvert. Configurez l\'intervalle entre les requêtes pour activer cette fonctionnalité (15s est la valeur recommandé par Matomo), ou 0s pour désactiver. Attention: cette opération générera un grand nombre de requêtes HTTP supplémentaires sur votre site.',
+>>>>>>> 3d839a3a9cb031905271b80b3c23c49a45106a85
 ));
