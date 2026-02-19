@@ -13,5 +13,8 @@
 			g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
 		})();
 	</script>
+	{% if MATOMOANALYTICS_NOSCRIPT_ENABLED %}
+	<noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="{{ MATOMOANALYTICS_URL }}matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+	{% endif %}
 	<!-- End Matomo Code -->
 {% endif %}

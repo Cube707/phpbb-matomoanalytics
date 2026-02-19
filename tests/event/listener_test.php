@@ -43,6 +43,7 @@ class listener_test extends \phpbb_test_case
 			'matomoanalytics_enabled' => true,
 			'matomoanalytics_url' => 'https://example.com/',
 			'matomoanalytics_site_id' => 1,
+			'matomoanalytics_noscript_enabled' => true,
 		]);
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
@@ -97,9 +98,10 @@ class listener_test extends \phpbb_test_case
 		$this->template->expects(self::once())
 			->method('assign_vars')
 			->with([
-				'MATOMOANALYTICS_ENABLED'	=> $this->config['matomoanalytics_enabled'],
-				'MATOMOANALYTICS_URL'		=> $this->config['matomoanalytics_url'],
-				'MATOMOANALYTICS_SITE_ID'	=> $this->config['matomoanalytics_site_id'],
+				'MATOMOANALYTICS_ENABLED'			=> $this->config['matomoanalytics_enabled'],
+				'MATOMOANALYTICS_URL'				=> $this->config['matomoanalytics_url'],
+				'MATOMOANALYTICS_SITE_ID'			=> $this->config['matomoanalytics_site_id'],
+				'MATOMOANALYTICS_NOSCRIPT_ENABLED'	=> $this->config['matomoanalytics_noscript_enabled'],
 			]);
 
 		$dispatcher = new \phpbb\event\dispatcher();
@@ -118,7 +120,7 @@ class listener_test extends \phpbb_test_case
 			[ // expected config and mode
 			  'settings',
 			  ['vars' => ['warnings_expire_days' => []]],
-			  ['warnings_expire_days', 'legend_matomoanalytics', 'matomoanalytics_enabled', 'matomoanalytics_url', 'matomoanalytics_site_id'],
+			  ['warnings_expire_days', 'legend_matomoanalytics', 'matomoanalytics_enabled', 'matomoanalytics_url', 'matomoanalytics_site_id', 'matomoanalytics_noscript_enabled'],
 			],
 			[ // unexpected mode
 			  'foobar',
