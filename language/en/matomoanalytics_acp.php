@@ -42,9 +42,11 @@ $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS_ENABLE'			=> 'Use Matomo',
 	'ACP_MATOMOANALYTICS_ENABLE_EXPLAIN'	=> 'Enable/disable Matomo for the whole website.',
 	'ACP_MATOMOANALYTICS_URL'				=> 'Matomo Tracker URL',
-	'ACP_MATOMOANALYTICS_URL_EXPLAIN'		=> 'The URL of your Matomo-instanz. You can find it in the web interface inside the JavaScript-Tracking-Code right behind <i>var u=</i>.',
+	'ACP_MATOMOANALYTICS_URL_EXPLAIN'		=> 'The URL of your Matomo-instanz. You can find it in the webinterface inside the JavaScript-Tracking-Code right behind <i>var u=</i>.',
 	'ACP_MATOMOANALYTICS_URL_INVALID'		=> 'The Matomo Tracker URL must match this format: <i>http(s)://example.com/</i> (note the trailing slash)',
 	'ACP_MATOMOANALYTICS_SITE_ID'			=> 'Website ID',
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'The ID of your website from Matomo.',
-	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID must be a positive integer.',
+	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID bust be a positiv integer.',
+	'ACP_MATOMOANALYTICS_USER_ID_ENABLED'	=> 'Include Username into statistics. Only if the user is logged',
+	'ACP_MATOMOANALYTICS_HEARTBEAT'			=> 'Enable a heartbeat timer to get more accurate visit lengths by sending periodical HTTP ping requests as long as the site is opened. Enter the time between the pings in seconds (Matomo default: 15) to enable or 0 to disable this feature. Note: This will cause a lot of additional HTTP requests on your site.',
 ));

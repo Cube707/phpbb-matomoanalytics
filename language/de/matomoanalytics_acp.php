@@ -47,4 +47,6 @@ $lang = array_merge($lang, array(
 	'ACP_MATOMOANALYTICS_SITE_ID'			=> 'Webseiten ID',
 	'ACP_MATOMOANALYTICS_SITE_ID_EXPLAIN'	=> 'Die ID deiner Webseite inerhalb von Matomo.',
 	'ACP_MATOMOANALYTICS_SITE_ID_INVALID'	=> 'ID muss eine positive ganze zahl sein.',
+	'ACP_MATOMOANALYTICS_USER_ID_ENABLED'	=> 'Den Benutzernamen in die Statistiken einbeziehen. Nur wenn der Benutzer angemeldet ist.',
+	'ACP_MATOMOANALYTICS_HEARTBEAT'			=> 'Aktivieren Sie einen Heartbeat-Timer, um genauere Besuchszeiten zu ermitteln. Dieser sendet regelmäßig HTTP-Ping-Anfragen, solange die Website geöffnet ist. Geben Sie das Zeitintervall zwischen den Pings in Sekunden ein (Matomo-Standard: 15), um diese Funktion zu aktivieren, oder 0, um sie zu deaktivieren. Hinweis: Dies führt zu einer Vielzahl zusätzlicher HTTP-Anfragen auf Ihrer Website.'
 ));
