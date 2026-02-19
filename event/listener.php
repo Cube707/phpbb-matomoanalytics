@@ -75,10 +75,10 @@ class listener implements EventSubscriberInterface
 	public function load_matomoanalytics()
 	{
 		$this->template->assign_vars([
-			'MATOMOANALYTICS_ENABLED'	=> $this->config['matomoanalytics_enabled'],
-			'MATOMOANALYTICS_URL'		=> $this->config['matomoanalytics_url'],
-			'MATOMOANALYTICS_SITE_ID'	=> $this->config['matomoanalytics_site_id'],
-			'MATOMOANALYTICS_NOSCRIPT_ENABLED'   => $this->config['matomoanalytics_noscript_enabled'],
+			'MATOMOANALYTICS_ENABLED'			=> $this->config['matomoanalytics_enabled'],
+			'MATOMOANALYTICS_URL'				=> $this->config['matomoanalytics_url'],
+			'MATOMOANALYTICS_SITE_ID'			=> $this->config['matomoanalytics_site_id'],
+			'MATOMOANALYTICS_NOSCRIPT_ENABLED'	=> $this->config['matomoanalytics_noscript_enabled'],
 		]);
 	}
 
@@ -122,11 +122,11 @@ class listener implements EventSubscriberInterface
 					'explain'	=> true,
 				],
 				'matomoanalytics_noscript_enabled' => [
-                    'lang'      => 'ACP_MATOMOANALYTICS_NOSCRIPT_ENABLE',
-                    'validate'  => 'bool',
-                    'type'      => 'radio:yes_no',
-                    'explain'   => true,
-                ],
+					'lang'		=> 'ACP_MATOMOANALYTICS_NOSCRIPT_ENABLE',
+					'validate'	=> 'bool',
+					'type'		=> 'radio:yes_no',
+					'explain'	=> true,
+				],
 			];
 
 			// Add the new config vars after warnings_expire_days in the display_vars config array
