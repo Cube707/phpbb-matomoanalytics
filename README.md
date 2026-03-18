@@ -6,6 +6,10 @@ extention.
 [![Build Status](https://github.com/Cube707/phpbb-matomoanalytics/workflows/Tests/badge.svg)](https://github.com/Cube707/phpbb-matomoanalytics/actions)
 [![codecov](https://codecov.io/gh/Cube707/phpbb-matomoanalytics/graph/badge.svg?token=8TYBD43FQD)](https://codecov.io/gh/Cube707/phpbb-matomoanalytics)
 
+> [!IMPORTANT]
+> This Repository is no longer Maintained.
+> Check out [zorglube's fork](https://github.com/zorglube/phpbb-matomoanalytics) for continued development.
+
 ## Install
 
 1. [Download the latest validated release](https://github.com/Cube707/phpbb-matomoanalytics/releases).
