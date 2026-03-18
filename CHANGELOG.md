@@ -1,12 +1,12 @@
 # Changelog
 
-## 1.1.0 - 2026-02-16
+## 1.1.0 - 2026-03-18
 
-- add privacy information
+- automatically add privacy information for Matomo to the sites privacy policy
 
 ## 1.0.7 - 2026-01-13
 
-- add french translation
+- add french translation (thanks @zorglube)
 - fix spelling
 
 ## 1.0.6 - 2026-01-12
